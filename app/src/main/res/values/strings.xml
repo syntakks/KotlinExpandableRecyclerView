@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">KotlinExpandableRecyclerView</string>
+    <string name="group_text">Group</string>
+    <string name="user_text">User</string>
+    <string name="description_contact_image_in_list">Contact image in list.</string>
+</resources>
