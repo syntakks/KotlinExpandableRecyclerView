@@ -3,17 +3,21 @@ package io.syntaks.kotlinexpandablerecyclerview.data
 class ContactsCache {
     var circles = mutableListOf<Circle>()
     var contacts = mutableListOf<Contact>()
+    var flatMap = mutableListOf<Any>()
+
     init {
         circles = Circle.circles
         contacts = Contact.contacts
-    }
-    fun getContactsForCircle(circle: Int): List<Contact> {
-        val results: MutableList<Contact> = ArrayList()
-        for (contact in contacts) {
-            if (contact.groups.contains(circle)) {
-                results.add(contact)
+        for (circle in circles) {
+            flatMap.add(circle)
+            for (contact in circle.contacts) {
+                flatMap.add(contact.copy())
             }
         }
-        return results
     }
+
+    fun getCircleById(circleId: Int): Circle? {
+        return circles.find { circle -> circle.id == circleId }
+    }
+
 }

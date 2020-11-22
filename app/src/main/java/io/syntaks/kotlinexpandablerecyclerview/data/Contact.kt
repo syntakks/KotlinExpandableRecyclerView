@@ -1,28 +1,44 @@
 package io.syntaks.kotlinexpandablerecyclerview.data
 
-data class Contact(val name: String, val groups: List<Int>, var selected: Boolean) {
+data class Contact(val id: Int, val name: String, var selected: Boolean = false, var circleId: Int = 0) {
     companion object {
+        // Dummy Data
         val contacts = mutableListOf(
-            Contact("Steve", listOf(1), false),
-            Contact("John",listOf(1, 2), false),
-            Contact("Mary",listOf(1, 3), false),
-            Contact("Bill",listOf(1, 5), false),
-            Contact("Laura",listOf(1, 2, 3, 4), false),
-            Contact("Jacob",listOf(1, 5, 7, 8), false),
-            Contact("Max",listOf(1, 2), false),
-            Contact("Joe",listOf(1, 4, 5, 6), false),
-            Contact("Jayne",listOf(1, 8, 9, 10), false),
-            Contact("Peter",listOf(1, 5, 6), false),
-            Contact("Kale",listOf(1, 4, 6), false),
-            Contact("Megan",listOf(1, 6, 9), false),
-            Contact("Tina",listOf(1, 10, 11), false),
-            Contact("Thomas",listOf(1, 11), false),
-            Contact("Dane",listOf(1, 15), false),
-            Contact("Turner",listOf(1, 8), false),
-            Contact("Ike",listOf(1, 3, 4), false),
-            Contact("Stanky Leg",listOf(1, 9, 10), false),
-            Contact("Patrick",listOf(1, 12, 13, 14), false),
-            Contact("Tallulah",listOf(1, 11, 12, 13, 14, 15), false)
+            Contact(1, "Steve"),
+            Contact(2, "John"),
+            Contact(3, "Mary"),
+            Contact(4, "Bill"),
+            Contact(5, "Laura"),
+            Contact(6, "Jacob"),
+            Contact(7, "Max"),
+            Contact(8, "Joe"),
+            Contact(9, "Jayne"),
+            Contact(10, "Peter"),
+            Contact(11, "Kale"),
+            Contact(12, "Megan"),
+            Contact(13, "Tina"),
+            Contact(14, "Thomas"),
+            Contact(15, "Dane"),
+            Contact(16, "Turner"),
+            Contact(17, "Ike"),
+            Contact(18, "Stanky Leg"),
+            Contact(19, "Patrick"),
+            Contact(20, "Tallulah")
         )
+
+        fun setupDummyData(contactIds: List<Int>, circleId: Int): MutableList<Contact> {
+            var results: MutableList<Contact> = ArrayList()
+            for (contact in contacts) {
+                if (contactIds.contains(contact.id)) {
+                    contact.circleId = circleId
+                    results.add(contact)
+                }
+            }
+            return results
+        }
+
+        fun toggleSelection(contactIds: List<Int>) {
+
+        }
     }
 }

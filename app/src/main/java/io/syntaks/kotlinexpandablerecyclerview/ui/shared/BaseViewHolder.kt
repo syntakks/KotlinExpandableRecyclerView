@@ -1,4 +1,4 @@
-package io.syntaks.kotlinexpandablerecyclerview.ui
+package io.syntaks.kotlinexpandablerecyclerview.ui.shared
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
