@@ -37,8 +37,5 @@ data class Contact(val id: Int, val name: String, var selected: Boolean = false,
             return results
         }
 
-        fun toggleSelection(contactIds: List<Int>) {
-
-        }
     }
 }

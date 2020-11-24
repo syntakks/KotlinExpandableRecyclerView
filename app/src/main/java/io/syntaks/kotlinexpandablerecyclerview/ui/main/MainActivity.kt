@@ -13,6 +13,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = ContactsAdapter(ContactsCache())
+        recyclerView.adapter = ContactsAdapter(ContactsCache.contactListData)
     }
 }

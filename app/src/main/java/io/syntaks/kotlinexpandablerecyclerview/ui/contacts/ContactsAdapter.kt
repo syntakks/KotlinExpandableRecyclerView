@@ -12,21 +12,16 @@ import io.syntaks.kotlinexpandablerecyclerview.ui.shared.BaseViewHolder
 
 private const val TAG = "ContactsAdapter"
 
-class ContactsAdapter(private val contactsCache: ContactsCache) :
+class ContactsAdapter(private val contactsListData: MutableList<Any>) :
     RecyclerView.Adapter<BaseViewHolder<*>>(),
     CircleListItemListener, ContactListItemListener {
-    private val data: MutableList<Any>
+    private val data: MutableList<Any> = contactsListData
     private var toggleInProgress = false
     private var selectionInProgress = false
 
     companion object {
         private const val TYPE_CIRCLE = 0
         private const val TYPE_CONTACT = 1
-    }
-
-    init {
-        data = ArrayList()
-        data.addAll(contactsCache.circles)
     }
 
     // Create new views (invoked by the layout manager)
@@ -80,7 +75,8 @@ class ContactsAdapter(private val contactsCache: ContactsCache) :
             if (circle.expanded) {
                 // Remove
                 for (i in circleContacts.indices) {
-                    data.removeAt(start)
+                    if (data[start] is Contact)
+                        data.removeAt(start)
                 }
                 notifyItemRangeRemoved(start, circleContacts.size)
             } else {
@@ -118,7 +114,7 @@ class ContactsAdapter(private val contactsCache: ContactsCache) :
         if (data[position] is Contact) {
             val contact = data[position] as Contact
             contact.selected = !contact.selected
-            val circle = contactsCache.getCircleById(contact.circleId)
+            val circle = ContactsCache.getCircleById(contact.circleId)
             if (circle != null) {
                 circle.contacts.find { c ->  c.id == contact.id}?.selected = contact.selected
             }
