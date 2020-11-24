@@ -11,11 +11,11 @@ import kotlinx.android.synthetic.main.list_item_contact.view.*
 private const val TAG = "ContactViewHolder"
 
 class ContactViewHolder(
-    private val itemView: View,
+    private val contactView: View,
     private val listItemListener: ContactListItemListener
-) : BaseViewHolder<Contact>(itemView), View.OnClickListener {
-    private val cardView = itemView.cardView
-    private val circleLabel = itemView.contactLabel
+) : BaseViewHolder<Contact>(contactView), View.OnClickListener {
+    private val cardView = contactView.cardView
+    private val circleLabel = contactView.contactLabel
 
     override fun bind(item: Contact) {
         cardView.setOnClickListener(this)
@@ -23,15 +23,15 @@ class ContactViewHolder(
         if (item.selected) {
             cardView.setCardBackgroundColor(
                 ColorHelper.stateListForColorResource(
-                    itemView.context.resources.getColor(
-                        R.color.purple_700, null
+                    contactView.context.resources.getColor(
+                        R.color.secondaryLightColor, null
                     )
                 )
             )
         } else {
             cardView.setCardBackgroundColor(
                 ColorHelper.stateListForColorResource(
-                    itemView.context.resources.getColor(
+                    contactView.context.resources.getColor(
                         R.color.white, null
                     )
                 )

@@ -11,11 +11,11 @@ import kotlinx.android.synthetic.main.list_item_circle.view.*
 private const val TAG = "CircleViewHolder"
 
 class CircleViewHolder(
-    private val itemView: View,
+    private val circleView: View,
     private val listItemListener: CircleListItemListener
-) : BaseViewHolder<Circle>(itemView), View.OnClickListener, View.OnLongClickListener {
-    private var cardView = itemView.cardView
-    private val circleLabel = itemView.circleLabel
+) : BaseViewHolder<Circle>(circleView), View.OnClickListener, View.OnLongClickListener {
+    private var cardView = circleView.cardView
+    private val circleLabel = circleView.circleLabel
 
     override fun bind(item: Circle) {
         Log.d(TAG, "bind: ")
@@ -25,8 +25,8 @@ class CircleViewHolder(
         if (item.selected) {
             cardView.setCardBackgroundColor(
                 ColorHelper.stateListForColorResource(
-                    itemView.context.resources.getColor(
-                        R.color.purple_700,
+                    circleView.context.resources.getColor(
+                        R.color.secondaryLightColor,
                         null
                     )
                 )
@@ -34,7 +34,7 @@ class CircleViewHolder(
         } else {
             cardView.setCardBackgroundColor(
                 ColorHelper.stateListForColorResource(
-                    itemView.context.resources.getColor(
+                    circleView.context.resources.getColor(
                         R.color.white,
                         null
                     )

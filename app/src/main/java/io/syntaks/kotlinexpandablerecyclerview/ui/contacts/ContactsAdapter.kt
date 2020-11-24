@@ -1,9 +1,13 @@
 package io.syntaks.kotlinexpandablerecyclerview.ui.contacts
 
+import android.content.Context
+import android.text.Spanned
+import android.text.style.ImageSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.ChipDrawable
 import io.syntaks.kotlinexpandablerecyclerview.R
 import io.syntaks.kotlinexpandablerecyclerview.data.Circle
 import io.syntaks.kotlinexpandablerecyclerview.data.Contact
@@ -12,7 +16,11 @@ import io.syntaks.kotlinexpandablerecyclerview.ui.shared.BaseViewHolder
 
 private const val TAG = "ContactsAdapter"
 
-class ContactsAdapter(private val contactsListData: MutableList<Any>) :
+class ContactsAdapter(
+    private val context: Context,
+    private val contactsListData: MutableList<Any>,
+    private val contactsSearchListener: ContactSearchListener
+) :
     RecyclerView.Adapter<BaseViewHolder<*>>(),
     CircleListItemListener, ContactListItemListener {
     private val data: MutableList<Any> = contactsListData
@@ -116,11 +124,16 @@ class ContactsAdapter(private val contactsListData: MutableList<Any>) :
             contact.selected = !contact.selected
             val circle = ContactsCache.getCircleById(contact.circleId)
             if (circle != null) {
-                circle.contacts.find { c ->  c.id == contact.id}?.selected = contact.selected
+                circle.contacts.find { c -> c.id == contact.id }?.selected = contact.selected
             }
             updateContactCopies(listOf(contact), contact.selected)
             updateCirclesSelection()
             notifyDataSetChanged()
+            if (contact.selected) {
+                contactsSearchListener.addContactChip(contact)
+            } else {
+                contactsSearchListener.removeContactChip(contact)
+            }
             selectionInProgress = false
         }
     }
